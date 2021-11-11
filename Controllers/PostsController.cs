@@ -15,31 +15,45 @@ namespace api.Controllers
         // GET: api/Posts
         [EnableCors("OpenPolicy")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Post> Get()
         {
-            return new string[] { "value1", "value2" };
+            IGetAllPosts readObject = new ReadPostData();
+            return readObject.GetAllPosts();
         }
+        // public IEnumerable<string> Get()
+        // {
+        //     return new string[] { "value1", "value2" };
+        // }
 
         // GET: api/Posts/5
         [EnableCors("OpenPolicy")]
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Post Get(int id)
         {
-            return "value";
+            IGetPosts readObject = new ReadPostData();
+            return readObject.GetPost(id);
         }
+        //         public string Get(int id)
+        // {
+        //     return "value";
+        // }
 
         // POST: api/Posts
         [EnableCors("OpenPolicy")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Post value)
         {
+            IInsertPost insertObject = new SavePost();
+            insertObject.InsertPost(value);
         }
 
         // PUT: api/Posts/5
         [EnableCors("OpenPolicy")]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Post value)
         {
+            IEditPost insertObject = new EdPost();
+            insertObject.EditPosts(id, value.Text);
         }
 
         // DELETE: api/Posts/5
@@ -47,6 +61,8 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            IDeletePost insertObject = new DelPost();
+            insertObject.DeletePost(id);
         }
     }
 }
