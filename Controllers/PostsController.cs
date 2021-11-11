@@ -22,10 +22,6 @@ namespace api.Controllers
             IGetAllPosts readObject = new ReadPostData();
             return readObject.GetAllPosts();
         }
-        // public IEnumerable<string> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
 
         // GET: api/Posts/5
         [EnableCors("OpenPolicy")]
@@ -35,10 +31,6 @@ namespace api.Controllers
             IGetPosts readObject = new ReadPostData();
             return readObject.GetPost(id);
         }
-        //         public string Get(int id)
-        // {
-        //     return "value";
-        // }
 
         // POST: api/Posts
         [EnableCors("OpenPolicy")]
@@ -54,7 +46,7 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Post value)
         {
-            IEditPost insertObject = new EdPost();
+            IEditPost insertObject = new EditPost();
             insertObject.EditPosts(id, value.Text);
         }
 
@@ -63,8 +55,8 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            IDeletePost insertObject = new DelPost();
-            insertObject.DeletePost(id);
+            IDeletePost insertObject = new DeletePost();
+            insertObject.DeletePosts(id);
         }
     }
 }
